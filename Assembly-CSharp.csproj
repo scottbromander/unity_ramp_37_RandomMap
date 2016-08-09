@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\RandomMapGen\Scripts\Map.cs" />
+     <Compile Include="Assets\RandomMapGen\Scripts\PixelPerfectCamera.cs" />
      <Compile Include="Assets\RandomMapGen\Scripts\RandomMapTester.cs" />
      <Compile Include="Assets\RandomMapGen\Scripts\Tile.cs" />
  <Reference Include="UnityEngine.Networking">
