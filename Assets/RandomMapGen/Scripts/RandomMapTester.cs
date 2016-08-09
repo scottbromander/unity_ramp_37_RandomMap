@@ -13,6 +13,9 @@ public class RandomMapTester : MonoBehaviour {
 	public GameObject tilePrefab;
 	public Vector2 tileSize = new Vector2 (16, 16);
 
+	[Space]
+	[Header ("Map Sprites")]
+	public Texture2D islandTexture;
 
 	public Map map;
 
@@ -28,6 +31,9 @@ public class RandomMapTester : MonoBehaviour {
 	}
 
 	void CreateGrid(){
+		ClearMapContainer ();
+		Sprite[] sprites = Resources.LoadAll<Sprite> (islandTexture.name);
+
 		var total = map.tiles.Length;
 		var maxColumns = map.columns;
 		var column = 0;
@@ -43,9 +49,20 @@ public class RandomMapTester : MonoBehaviour {
 			go.transform.SetParent (mapContainer.transform);
 			go.transform.position = new Vector3 (newX, newY, 0);
 
+			var spriteID = 0;
+			var sr = go.GetComponent<SpriteRenderer> ();
+			sr.sprite = sprites [spriteID];
+
 			if (column == (maxColumns - 1)) {
 				row++;
 			}
+		}
+	}
+
+	void ClearMapContainer(){
+		var children = mapContainer.transform.GetComponentsInChildren<Transform> ();
+		for (var i = children.Length - 1; i > 0; i--) {
+			Destroy (children [i].gameObject);
 		}
 	}
 }
