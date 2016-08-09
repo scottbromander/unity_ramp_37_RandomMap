@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{3DA91DAE-E18F-71A4-AB24-13AEB6605A2A}") = "37_Unity_MapGeneration", "Assembly-CSharp.csproj", "{FB86AF8F-9523-A143-A59F-DDFDF854EE0C}"
 EndProject
+Project("{3DA91DAE-E18F-71A4-AB24-13AEB6605A2A}") = "37_Unity_MapGeneration", "Assembly-CSharp-Editor.csproj", "{0C4704C2-1669-FA3A-6802-8DBCE43C72D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{FB86AF8F-9523-A143-A59F-DDFDF854EE0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB86AF8F-9523-A143-A59F-DDFDF854EE0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB86AF8F-9523-A143-A59F-DDFDF854EE0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C4704C2-1669-FA3A-6802-8DBCE43C72D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C4704C2-1669-FA3A-6802-8DBCE43C72D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C4704C2-1669-FA3A-6802-8DBCE43C72D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C4704C2-1669-FA3A-6802-8DBCE43C72D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
