@@ -5,8 +5,9 @@ using System.Linq;
 public enum TileType {
 	Empty = -1,
 	Grass = 15,
-
-
+	Tree = 16,
+	Hills = 17,
+	Mountains = 18
 }
 
 public class Map {
@@ -21,6 +22,12 @@ public class Map {
 		}
 	}
 
+	public Tile[] landTiles{
+		get{
+			return tiles.Where (t => t.autoTileID == (int)TileType.Grass).ToArray ();
+		}
+	}
+
 	public void NewMap(int width, int height){
 		columns = width;
 		rows = height;
@@ -31,9 +38,18 @@ public class Map {
 	}
 
 	public void CreateIsland(
-		float erodePercent
+		float erodePercent,
+		int erodeIterations,
+		float treePercent,
+		float hillPercent,
+		float mountainPercent
 	){
-		DecorateTiles (coastTiles, erodePercent, TileType.Empty);
+		for (var i = 0; i < erodeIterations; i++) {
+			DecorateTiles (coastTiles, erodePercent, TileType.Empty);
+		}
+		DecorateTiles (landTiles, treePercent, TileType.Tree);
+		DecorateTiles (landTiles, hillPercent, TileType.Hills);
+		DecorateTiles (landTiles, mountainPercent, TileType.Mountains);
 	}
 
 	private void CreateTiles(){
@@ -78,6 +94,9 @@ public class Map {
 
 	public void DecorateTiles(Tile[] tiles, float percent, TileType type){
 		var total = Mathf.FloorToInt (tiles.Length * percent);
+
+		RandomizeTileArray (tiles);
+
 		for (var i = 0; i < total; i++) {
 			var tile = tiles [i];
 
@@ -86,6 +105,15 @@ public class Map {
 			}
 
 			tile.autoTileID = (int)type;
+		}
+	}
+
+	public void RandomizeTileArray(Tile[] tiles){
+		for (var i = 0; i < tiles.Length; i++) {
+			var temp = tiles [i];
+			var r = Random.Range (i, tiles.Length);
+			tiles [i] = tiles [r];
+			tiles [r] = temp;
 		}
 	}
 }
