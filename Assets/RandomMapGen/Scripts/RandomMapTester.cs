@@ -49,13 +49,19 @@ public class RandomMapTester : MonoBehaviour {
 			go.transform.SetParent (mapContainer.transform);
 			go.transform.position = new Vector3 (newX, newY, 0);
 
-			var spriteID = 0;
-			var sr = go.GetComponent<SpriteRenderer> ();
-			sr.sprite = sprites [spriteID];
+			var tile = map.tiles [i];
+			var spriteID = tile.autoTileID;
 
+
+			if(spriteID >= 0){
+				var sr = go.GetComponent<SpriteRenderer> ();
+				sr.sprite = sprites [spriteID];
+			}
+				
 			if (column == (maxColumns - 1)) {
 				row++;
 			}
+			
 		}
 	}
 
