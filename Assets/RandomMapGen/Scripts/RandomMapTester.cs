@@ -28,6 +28,12 @@ public class RandomMapTester : MonoBehaviour {
 	public float hillPercent = 0.2f;
 	[Range (0, .9f)]
 	public float mountainPercent = 0.1f;
+	[Range (0, .9f)]
+	public float townPercent = 0.05f;
+	[Range (0, .9f)]
+	public float monsterPercent = 0.1f;
+	[Range (0, .9f)]
+	public float lakePercent = 0.05f;
 
 	public Map map;
 
@@ -43,7 +49,10 @@ public class RandomMapTester : MonoBehaviour {
 			erodeIterations,
 			treePercent,
 			hillPercent,
-			mountainPercent
+			mountainPercent,
+			townPercent,
+			monsterPercent,
+			lakePercent
 		);
 		CreateGrid ();
 	}

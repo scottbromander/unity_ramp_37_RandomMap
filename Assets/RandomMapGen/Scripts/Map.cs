@@ -7,7 +7,10 @@ public enum TileType {
 	Grass = 15,
 	Tree = 16,
 	Hills = 17,
-	Mountains = 18
+	Mountains = 18,
+	Towns = 19, 
+	Castle = 20,
+	Monster = 21
 }
 
 public class Map {
@@ -42,14 +45,21 @@ public class Map {
 		int erodeIterations,
 		float treePercent,
 		float hillPercent,
-		float mountainPercent
+		float mountainPercent,
+		float townPercent,
+		float monsterPercent,
+		float lakePercent
 	){
+		DecorateTiles (landTiles, lakePercent, TileType.Empty);
+
 		for (var i = 0; i < erodeIterations; i++) {
 			DecorateTiles (coastTiles, erodePercent, TileType.Empty);
 		}
 		DecorateTiles (landTiles, treePercent, TileType.Tree);
 		DecorateTiles (landTiles, hillPercent, TileType.Hills);
 		DecorateTiles (landTiles, mountainPercent, TileType.Mountains);
+		DecorateTiles (landTiles, townPercent, TileType.Towns);
+		DecorateTiles (landTiles, monsterPercent, TileType.Monster);
 	}
 
 	private void CreateTiles(){
