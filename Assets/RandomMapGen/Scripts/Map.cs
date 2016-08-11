@@ -31,6 +31,12 @@ public class Map {
 		}
 	}
 
+	public Tile castleTile{
+		get{
+			return tiles.FirstOrDefault (t => t.autoTileID == (int)TileType.Castle);
+		}
+	}
+
 	public void NewMap(int width, int height){
 		columns = width;
 		rows = height;
@@ -55,6 +61,11 @@ public class Map {
 		for (var i = 0; i < erodeIterations; i++) {
 			DecorateTiles (coastTiles, erodePercent, TileType.Empty);
 		}
+
+		var openTiles = landTiles;
+		RandomizeTileArray (openTiles);
+		openTiles [0].autoTileID = (int)TileType.Castle;
+
 		DecorateTiles (landTiles, treePercent, TileType.Tree);
 		DecorateTiles (landTiles, hillPercent, TileType.Hills);
 		DecorateTiles (landTiles, mountainPercent, TileType.Mountains);

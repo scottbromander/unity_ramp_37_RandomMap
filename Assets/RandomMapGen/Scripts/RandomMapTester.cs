@@ -55,6 +55,7 @@ public class RandomMapTester : MonoBehaviour {
 			lakePercent
 		);
 		CreateGrid ();
+		CenterMap (map.castleTile.id);
 	}
 
 	void CreateGrid(){
@@ -97,5 +98,13 @@ public class RandomMapTester : MonoBehaviour {
 		for (var i = children.Length - 1; i > 0; i--) {
 			Destroy (children [i].gameObject);
 		}
+	}
+
+	void CenterMap(int index){
+		var camPos = Camera.main.transform.position;
+		var width = map.columns;
+		camPos.x = (index % width) * tileSize.x;
+		camPos.y = -((index / width) * tileSize.y);
+		Camera.main.transform.position = camPos;
 	}
 }
