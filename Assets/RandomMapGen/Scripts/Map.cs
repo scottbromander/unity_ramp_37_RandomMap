@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public enum TileType {
 	Empty = -1,
@@ -14,6 +15,12 @@ public class Map {
 	public int columns;
 	public int rows;
 
+	public Tile[] coastTiles {
+		get{
+			return tiles.Where (t => t.autoTileID < (int)TileType.Grass).ToArray ();
+		}
+	}
+
 	public void NewMap(int width, int height){
 		columns = width;
 		rows = height;
@@ -21,6 +28,12 @@ public class Map {
 		tiles = new Tile[columns * rows];
 
 		CreateTiles ();
+	}
+
+	public void CreateIsland(
+		float erodePercent
+	){
+		DecorateTiles (coastTiles, erodePercent, TileType.Empty);
 	}
 
 	private void CreateTiles(){
