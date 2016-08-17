@@ -6,4 +6,5 @@ This is part of a continuing education challenge I am doing where I make a commi
 In the first course, I learned a ton about Auto-Tiling and a bit about BitMasking. Both new areas for me. Some concepts were review for me, such as managing two dimensional grids in a singular string or list of information.
 
 https://www.lynda.com/Unity-tutorials/Unity-5-2D-Movement-RPG-Game/475938-2.html
+
 https://www.lynda.com/Unity-tutorials/Unity-5-2D-Random-Map-Generation/475939-2.html
