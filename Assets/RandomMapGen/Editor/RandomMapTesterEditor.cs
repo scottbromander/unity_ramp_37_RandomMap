@@ -15,5 +15,11 @@ public class NewBehaviourScript : Editor {
 				script.MakeMap ();
 			}
 		}
+
+		if(GUILayout.Button("Create Player")){
+			if (Application.isPlaying) {
+				script.CreatePlayer ();
+			}
+		}
 	}
 }

@@ -18,6 +18,11 @@ public class RandomMapTester : MonoBehaviour {
 	public Texture2D islandTexture;
 
 	[Space]
+	[Header ("Player")]
+	public GameObject playerPrefab;
+	public GameObject player;
+
+	[Space]
 	[Header ("Decorate Map")]
 	[Range (0, .9f)]
 	public float erodePercent = 0.5f;
@@ -91,6 +96,13 @@ public class RandomMapTester : MonoBehaviour {
 			}
 			
 		}
+	}
+
+	public void CreatePlayer(){
+		player = Instantiate (playerPrefab);
+		player.name = "Player";
+		player.transform.SetParent (mapContainer.transform);
+		player.transform.position = new Vector3 (0, 0, 0);
 	}
 
 	void ClearMapContainer(){
