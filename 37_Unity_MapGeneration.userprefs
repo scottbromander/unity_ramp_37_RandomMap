@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/RandomMapGen/Editor/RandomMapTesterEditor.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/RandomMapGen/Scripts/RandomMapTester.cs">
     <Files>
-      <File FileName="Assets/RandomMapGen/Scripts/Tile.cs" Line="13" Column="9" />
-      <File FileName="Assets/RandomMapGen/Scripts/Map.cs" Line="29" Column="1" />
-      <File FileName="Assets/RandomMapGen/Scripts/RandomMapTester.cs" Line="19" Column="77" />
+      <File FileName="Assets/RandomMapGen/Scripts/Tile.cs" Line="41" Column="8" />
+      <File FileName="Assets/RandomMapGen/Scripts/Map.cs" Line="36" Column="76" />
+      <File FileName="Assets/RandomMapGen/Scripts/RandomMapTester.cs" Line="60" Column="2" />
       <File FileName="Assets/RandomMapGen/Editor/RandomMapTesterEditor.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
