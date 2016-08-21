@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\RandomMapGen\Scripts\Map.cs" />
+     <Compile Include="Assets\RandomMapGen\Scripts\MapMovementController.cs" />
      <Compile Include="Assets\RandomMapGen\Scripts\MoveCamera.cs" />
      <Compile Include="Assets\RandomMapGen\Scripts\PixelPerfectCamera.cs" />
      <Compile Include="Assets\RandomMapGen\Scripts\PosUtil.cs" />
