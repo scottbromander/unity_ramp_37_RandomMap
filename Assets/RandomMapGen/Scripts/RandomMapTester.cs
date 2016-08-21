@@ -48,6 +48,13 @@ public class RandomMapTester : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		map = new Map ();
+		MakeMap ();
+		StartCoroutine (AddPlayer ());
+	}
+
+	IEnumerator AddPlayer(){
+		yield return new WaitForEndOfFrame ();
+		CreatePlayer ();
 	}
 	
 	public void MakeMap(){
@@ -105,7 +112,13 @@ public class RandomMapTester : MonoBehaviour {
 		player = Instantiate (playerPrefab);
 		player.name = "Player";
 		player.transform.SetParent (mapContainer.transform);
-		player.transform.position = new Vector3 (0, 0, 0);
+
+		PosUtil.CalculatePosition (map.castleTile.id, map.columns, out tmpX, out tmpY);
+
+		tmpX *= (int)tileSize.x;
+		tmpY *= -(int)tileSize.y;
+
+		player.transform.position = new Vector3 (tmpX, tmpY, 0);
 	}
 
 	void ClearMapContainer(){
