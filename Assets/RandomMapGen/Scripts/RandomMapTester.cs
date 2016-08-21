@@ -42,6 +42,9 @@ public class RandomMapTester : MonoBehaviour {
 
 	public Map map;
 
+	private int tmpX;
+	private int tmpY;
+
 	// Use this for initialization
 	void Start () {
 		map = new Map ();
@@ -115,8 +118,11 @@ public class RandomMapTester : MonoBehaviour {
 	void CenterMap(int index){
 		var camPos = Camera.main.transform.position;
 		var width = map.columns;
-		camPos.x = (index % width) * tileSize.x;
-		camPos.y = -((index / width) * tileSize.y);
+
+		PosUtil.CalculatePosition (index, width, out tmpX, out tmpY);
+
+		camPos.x = tmpX * tileSize.x;
+		camPos.y = -tmpY * tileSize.y;
 		Camera.main.transform.position = camPos;
 	}
 }
