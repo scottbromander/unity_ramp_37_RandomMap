@@ -8,12 +8,18 @@ public class MapMovementController : MonoBehaviour {
 
 	public int currentTile;
 
-	private int tempIndex;
+	public float speed = 1f;
+	public bool moving;
 
+	private float moveTime;
+	private Vector2 startPos;
+	private Vector2 endPos;
+
+	private int tempIndex;
 	private int tmpX;
 	private int tmpY;
 
-	public void MoveTo(int index){
+	public void MoveTo(int index, bool animate = false){
 
 		currentTile = index;
 
@@ -22,7 +28,16 @@ public class MapMovementController : MonoBehaviour {
 		tmpX *= (int)tileSize.x;
 		tmpY *= -(int)tileSize.y;
 
-		transform.position = new Vector3 (tmpX, tmpY, 0);
+		var newPos = new Vector3 (tmpX, tmpY, 0);
+
+		if (!animate) {
+			transform.position = newPos;
+		} else {
+			startPos = transform.position;
+			endPos = newPos;
+			moveTime = 0;
+			moving = true;
+		}
 	}
 
 	public void MoveInDirection(Vector2 dir){
@@ -33,6 +48,18 @@ public class MapMovementController : MonoBehaviour {
 
 		PosUtil.CalculateIndex (tmpX, tmpY, map.columns, out tempIndex);
 
-		Debug.Log ("Moved to tile:  " + tempIndex);
+		MoveTo (tempIndex, true);
+	}
+
+	void Update(){
+		if (moving) {
+			moveTime += Time.deltaTime;
+			if (moveTime > speed) {
+				moving = false;
+				transform.position = endPos;
+			}
+
+			transform.position = Vector2.Lerp (startPos, endPos, moveTime / speed);
+		}
 	}
 }
