@@ -68,6 +68,9 @@ public class MapMovementController : MonoBehaviour {
 	}
 
 	bool CanMove(int index){
+		if (index < 0 || index >= map.tiles.Length)
+			return false;
+
 		var tileType = map.tiles [index].autoTileID;
 
 		if (moving || Array.IndexOf(blockedTileTypes, tileType) > -1)
