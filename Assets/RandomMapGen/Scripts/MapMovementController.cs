@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class MapMovementController : MonoBehaviour {
 
 	public Map map;
 	public Vector2 tileSize;
-
 	public int currentTile;
-
 	public float speed = 1f;
 	public bool moving;
+	public int[] blockedTileTypes;
 
 	private float moveTime;
 	private Vector2 startPos;
@@ -20,6 +20,10 @@ public class MapMovementController : MonoBehaviour {
 	private int tmpY;
 
 	public void MoveTo(int index, bool animate = false){
+
+		if (!CanMove (index)) 
+			return;
+		
 
 		currentTile = index;
 
@@ -61,5 +65,14 @@ public class MapMovementController : MonoBehaviour {
 
 			transform.position = Vector2.Lerp (startPos, endPos, moveTime / speed);
 		}
+	}
+
+	bool CanMove(int index){
+		var tileType = map.tiles [index].autoTileID;
+
+		if (moving || Array.IndexOf(blockedTileTypes, tileType) > -1)
+			return false;
+
+		return true;
 	}
 }
