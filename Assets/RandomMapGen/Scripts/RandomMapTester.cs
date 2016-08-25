@@ -63,6 +63,7 @@ public class RandomMapTester : MonoBehaviour {
 	IEnumerator AddPlayer(){
 		yield return new WaitForEndOfFrame ();
 		CreatePlayer ();
+		VisitTile (map.castleTile.id);
 	}
 	
 	public void MakeMap(){
@@ -105,7 +106,6 @@ public class RandomMapTester : MonoBehaviour {
 			if (column == (maxColumns - 1)) {
 				row++;
 			}
-			
 		}
 	}
 
@@ -142,7 +142,8 @@ public class RandomMapTester : MonoBehaviour {
 	}
 
 	void TileActionCallback(int type){
-		Debug.Log ("On Tile Type: " + type);
+		var tileID = player.GetComponent<MapMovementController> ().currentTile;
+		VisitTile (tileID);
 	}
 
 	void ClearMapContainer(){
@@ -161,5 +162,20 @@ public class RandomMapTester : MonoBehaviour {
 		camPos.x = tmpX * tileSize.x;
 		camPos.y = -tmpY * tileSize.y;
 		Camera.main.transform.position = camPos;
+	}
+
+	void VisitTile(int index){
+		var tile = map.tiles [index];
+		tile.visited = true;
+		DecorateTile (index);
+
+		foreach (var neighbor in tile.neighbors) {
+			if (neighbor != null) {
+				if (!neighbor.visited) {
+					neighbor.CalculateFowAutotileID ();
+					DecorateTile (neighbor.id);
+				}
+			}
+		}
 	}
 }
