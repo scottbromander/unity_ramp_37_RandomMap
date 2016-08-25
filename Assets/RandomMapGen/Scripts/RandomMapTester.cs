@@ -56,6 +56,10 @@ public class RandomMapTester : MonoBehaviour {
 		fowTileSprites = Resources.LoadAll<Sprite> (fowTexture.name);
 
 
+		Reset ();
+	}
+
+	public void Reset(){
 		map = new Map ();
 		MakeMap ();
 		StartCoroutine (AddPlayer ());
@@ -64,7 +68,7 @@ public class RandomMapTester : MonoBehaviour {
 	IEnumerator AddPlayer(){
 		yield return new WaitForEndOfFrame ();
 		CreatePlayer ();
-		VisitTile (map.castleTile.id);
+
 	}
 	
 	public void MakeMap(){
@@ -135,11 +139,12 @@ public class RandomMapTester : MonoBehaviour {
 		var controller = player.GetComponent<MapMovementController> ();
 		controller.map = map;
 		controller.tileSize = tileSize;
-		controller.MoveTo (map.castleTile.id);
 		controller.tileActionCallback += TileActionCallback;
 
 		var moveScript = Camera.main.GetComponent<MoveCamera> ();
 		moveScript.target = player;
+
+		controller.MoveTo (map.castleTile.id);
 	}
 
 	void TileActionCallback(int type){
@@ -185,15 +190,17 @@ public class RandomMapTester : MonoBehaviour {
 
 			PosUtil.CalculateIndex (newX, newY, map.columns, out index);
 
-			var tile = map.tiles [index];
-			tile.visited = true;
-			DecorateTile (index);
+			if (index > -1 && index < map.tiles.Length) {
+				var tile = map.tiles [index];
+				tile.visited = true;
+				DecorateTile (index);
 
-			foreach (var neighbor in tile.neighbors) {
-				if (neighbor != null) {
-					if (!neighbor.visited) {
-						neighbor.CalculateFowAutotileID ();
-						DecorateTile (neighbor.id);
+				foreach (var neighbor in tile.neighbors) {
+					if (neighbor != null) {
+						if (!neighbor.visited) {
+							neighbor.CalculateFowAutotileID ();
+							DecorateTile (neighbor.id);
+						}
 					}
 				}
 			}

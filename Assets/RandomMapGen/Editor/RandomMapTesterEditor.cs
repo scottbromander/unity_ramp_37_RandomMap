@@ -21,5 +21,11 @@ public class NewBehaviourScript : Editor {
 				script.CreatePlayer ();
 			}
 		}
+
+		if(GUILayout.Button("Reset")){
+			if (Application.isPlaying) {
+				script.Reset ();
+			}
+		}
 	}
 }
