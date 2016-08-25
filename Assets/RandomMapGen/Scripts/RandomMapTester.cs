@@ -116,7 +116,13 @@ public class RandomMapTester : MonoBehaviour {
 
 		if(spriteID >= 0){
 			var sr = go.GetComponent<SpriteRenderer> ();
-			sr.sprite = islandTileSprites [spriteID];
+
+			if (tile.visited) {
+				sr.sprite = islandTileSprites [spriteID];
+			} else {
+				tile.CalculateFowAutotileID ();
+				sr.sprite = fowTileSprites [Mathf.Min(tile.fowAutotileID, fowTileSprites.Length - 1)];
+			}
 		}
 	}
 
