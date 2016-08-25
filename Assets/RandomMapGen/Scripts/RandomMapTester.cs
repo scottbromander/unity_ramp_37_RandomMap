@@ -16,6 +16,7 @@ public class RandomMapTester : MonoBehaviour {
 	[Space]
 	[Header ("Map Sprites")]
 	public Texture2D islandTexture;
+	public Texture2D fowTexture;
 
 	[Space]
 	[Header ("Player")]
@@ -45,8 +46,15 @@ public class RandomMapTester : MonoBehaviour {
 	private int tmpX;
 	private int tmpY;
 
+	private Sprite[] islandTileSprites;
+	private Sprite[] fowTileSprites;
+
 	// Use this for initialization
 	void Start () {
+		islandTileSprites = Resources.LoadAll<Sprite> (islandTexture.name);
+		fowTileSprites = Resources.LoadAll<Sprite> (fowTexture.name);
+
+
 		map = new Map ();
 		MakeMap ();
 		StartCoroutine (AddPlayer ());
@@ -75,7 +83,7 @@ public class RandomMapTester : MonoBehaviour {
 
 	void CreateGrid(){
 		ClearMapContainer ();
-		Sprite[] sprites = Resources.LoadAll<Sprite> (islandTexture.name);
+
 
 		var total = map.tiles.Length;
 		var maxColumns = map.columns;
@@ -92,19 +100,23 @@ public class RandomMapTester : MonoBehaviour {
 			go.transform.SetParent (mapContainer.transform);
 			go.transform.position = new Vector3 (newX, newY, 0);
 
-			var tile = map.tiles [i];
-			var spriteID = tile.autoTileID;
-
-
-			if(spriteID >= 0){
-				var sr = go.GetComponent<SpriteRenderer> ();
-				sr.sprite = sprites [spriteID];
-			}
+			DecorateTile (i);
 				
 			if (column == (maxColumns - 1)) {
 				row++;
 			}
 			
+		}
+	}
+
+	private void DecorateTile(int tileID){
+		var tile = map.tiles [tileID];
+		var spriteID = tile.autoTileID;
+		var go = mapContainer.transform.GetChild (tileID).gameObject;
+
+		if(spriteID >= 0){
+			var sr = go.GetComponent<SpriteRenderer> ();
+			sr.sprite = islandTileSprites [spriteID];
 		}
 	}
 
