@@ -12,6 +12,8 @@ public class MapMovementController : MonoBehaviour {
 	public int[] blockedTileTypes;
 	public delegate void TileAction(int Type);
 	public TileAction tileActionCallback;
+	public delegate void MoveAction();
+	public MoveAction moveActionCallback;
 
 	private float moveTime;
 	private Vector2 startPos;
@@ -26,6 +28,9 @@ public class MapMovementController : MonoBehaviour {
 		if (!CanMove (index)) 
 			return;
 		
+		if (moveActionCallback != null) {
+			moveActionCallback ();
+		}
 
 		currentTile = index;
 
