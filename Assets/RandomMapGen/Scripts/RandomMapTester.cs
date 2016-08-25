@@ -22,6 +22,7 @@ public class RandomMapTester : MonoBehaviour {
 	[Header ("Player")]
 	public GameObject playerPrefab;
 	public GameObject player;
+	public int distance = 3;
 
 	[Space]
 	[Header ("Decorate Map")]
@@ -165,16 +166,40 @@ public class RandomMapTester : MonoBehaviour {
 	}
 
 	void VisitTile(int index){
-		var tile = map.tiles [index];
-		tile.visited = true;
-		DecorateTile (index);
+		int column, newX, newY, row = 0;
 
-		foreach (var neighbor in tile.neighbors) {
-			if (neighbor != null) {
-				if (!neighbor.visited) {
-					neighbor.CalculateFowAutotileID ();
-					DecorateTile (neighbor.id);
+		PosUtil.CalculatePosition (index, map.columns, out tmpX, out tmpY);
+
+		var half = Mathf.FloorToInt (distance / 2f);
+		tmpX -= half;
+		tmpY -= half;
+
+		var total = distance * distance;
+		var maxColumns = distance - 1;
+
+		for (int i = 0; i < total; i++) {
+
+			column = i % distance;
+			newX = column + tmpX;
+			newY = row + tmpY;
+
+			PosUtil.CalculateIndex (newX, newY, map.columns, out index);
+
+			var tile = map.tiles [index];
+			tile.visited = true;
+			DecorateTile (index);
+
+			foreach (var neighbor in tile.neighbors) {
+				if (neighbor != null) {
+					if (!neighbor.visited) {
+						neighbor.CalculateFowAutotileID ();
+						DecorateTile (neighbor.id);
+					}
 				}
+			}
+
+			if (column == maxColumns) {
+				row++;
 			}
 		}
 	}
